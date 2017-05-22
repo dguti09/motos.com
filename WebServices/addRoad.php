@@ -3,15 +3,11 @@
 include_once 'config.php';
 
 
-
-
-//INSERT INTO `RODADA`
-//(`ID_RODADA`, `ID_MIEMBRO`, `CIUDAD_ORIGEN`, `CIUDAD_DESTINO`, `NOMBRE_RODADA`, `FECHA_SALIDA`,
-// `FECHA_REGRESO`, `LUGAR_ENCUENTRO`, `HORA_ENCUENTRO`, `PRESUPUESTO_RODADA`) 
+// http://localhost/motos.com/WebServices/addRoad.php?id_miembro=1@2&ciudad_origen=tunja&ciudad_destino=tunja&nombre=prueba&f_salida=21-05-17&f_regreso=30-05-17&lug_encuentro=prueba&hora_encuentro=10:00:00&presupuesto=10000
 
 if (isset($_REQUEST['id_miembro']) AND isset($_REQUEST['ciudad_origen']) AND isset($_REQUEST['ciudad_destino']) AND isset($_REQUEST['nombre']) AND isset($_REQUEST['f_salida']) AND isset($_REQUEST['f_regreso']) AND isset($_REQUEST['lug_encuentro']) AND isset($_REQUEST['hora_encuentro']) AND isset($_REQUEST['presupuesto']) ) {
 
-	$id_miem = $_REQUEST['id_miembro'];
+	$email = $_REQUEST['id_miembro'];
 	$origen = $_REQUEST['ciudad_origen']; //nombre -> Tunja
 	$destino =  $_REQUEST['ciudad_destino']; //nombre -> Sogamoso
 	$nombre = $_REQUEST['nombre'];
@@ -31,6 +27,12 @@ if (isset($_REQUEST['id_miembro']) AND isset($_REQUEST['ciudad_origen']) AND iss
 	$queryResult = $conn->query($sqlcity);
 	while ($row = mysqli_fetch_row($queryResult)) {
 		$idDestino = $row[0];
+	}
+
+	$sqlMember = 'SELECT * FROM MIEMBRO WHERE CORREO_MIEMBRO = "'.$email.'"';
+	$queryResult = $conn->query($sqlMember);
+	while ($row = mysqli_fetch_row($queryResult)) {
+		$id_miem = $row[0];
 	}
 
 	$hora = $salida." ".$hora_encuentro;
