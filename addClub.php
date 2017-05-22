@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -34,6 +36,8 @@
 	<?php 
 	session_start();
 	include_once "Controllers/Connect.php";
+
+	//INSERT INTO `CLUB` (`ID_CLUB`, `UBICACION`, `NOMBRE_CLUB`, `LOGO_CLUB`, `DESCRIPCION`) VALUES (NULL, POINT(3123, 312312), 'club 1', 'https://knowlinemieds.com/Images/default.jpg', 'club de motos numero 1')
 
 	$now = time();
 	if (isset($_SESSION['loggedin']) AND $_SESSION['expire'] >= $now) {
