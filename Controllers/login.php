@@ -23,11 +23,12 @@ if ($executeGetMiembro->num_rows > 0) {
 		$_SESSION['start'] = time();
 		$_SESSION['expire'] = $_SESSION['start'] + (15 * 60);
 
-		echo var_dump($id_club);
+		//echo var_dump($id_club);
 
 		if ($id_club == null) {
 			$_SESSION['id_miembro'] = $id_miembro;
 			$_SESSION['user_name'] = $user_name;
+
 			echo "<meta http-equiv='refresh' content='0;URL=../addClub.php' />";
 		}else{
 
@@ -35,6 +36,13 @@ if ($executeGetMiembro->num_rows > 0) {
 			$_SESSION['user_name'] = $user_name;
 			echo "<meta http-equiv='refresh' content='0;URL=../motoclub.php' />";
 		}
+
+	}elseif(password_verify($password, $password_miembro) AND $typeMiembro== 'S'){
+		$_SESSION['loggedin'] = true;
+		$_SESSION['start'] = time();
+		$_SESSION['expire'] = $_SESSION['start'] + (15 * 60);
+		$_SESSION['user_name'] = $user_name;
+		echo "<meta http-equiv='refresh' content='0;URL=../admin.php' />";
 
 	}else{
 		echo "Username o Password estan incorrectos.";
